@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة XO العصرية - النسخة المصححة</title>
+    <title>لعبة XO العصرية - نسخة الدكتور</title>
     <style>
         :root {
             --primary-color: #6c5ce7;
@@ -49,11 +49,13 @@
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 2px solid #ddd;
             border-radius: 10px;
             outline: none;
+            transition: 0.3s;
         }
+        input:focus { border-color: var(--primary-color); }
 
         .btn {
             background: var(--primary-color);
@@ -89,20 +91,23 @@
             font-size: 2.5rem;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.2s;
         }
+        .cell:hover { background: #fff; border-color: var(--secondary-color); }
         .cell.x { color: var(--primary-color); }
         .cell.o { color: var(--accent-color); }
 
-        .status { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; min-height: 30px; }
+        .status { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; min-height: 30px; color: var(--text-color); }
 
         footer {
             background: var(--white);
             width: 100%;
             padding: 15px;
             text-align: center;
-            border-top: 3px solid var(--primary-color);
+            border-top: 4px solid var(--primary-color);
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
         }
-        footer p { font-size: 0.9rem; margin: 3px 0; }
+        footer p { font-size: 0.95rem; margin: 4px 0; color: #444; }
         .highlight { font-weight: bold; color: var(--primary-color); }
         .hidden { display: none !important; }
     </style>
@@ -114,11 +119,11 @@
             <h1>لعبة XO</h1>
             <div class="input-group">
                 <label>اسم اللاعب الأول (X):</label>
-                <input type="text" id="p1-name" placeholder="أحمد">
+                <input type="text" id="p1-name" placeholder="مثال: أحمد">
             </div>
             <div class="input-group">
                 <label>اسم اللاعب الثاني (O):</label>
-                <input type="text" id="p2-name" placeholder="محمد">
+                <input type="text" id="p2-name" placeholder="مثال: محمد">
             </div>
             <button class="btn" onclick="startGame(false)">لعب (لاعبين)</button>
             <button class="btn btn-outline" onclick="startGame(true)">لعب ضد الكمبيوتر</button>
@@ -145,7 +150,7 @@
     <footer>
         <p>اسم الطالب: <span class="highlight">فرج عبدالله بن فرج المحمادي</span></p>
         <p>الرقم الجامعي: <span class="highlight">446005636</span></p>
-        <p>بإشراف الأستاذ: <span class="highlight">محمد أحمد جبالي</span></p>
+        <p>بإشراف الدكتور: <span class="highlight">محمد أحمد جبلي</span></p>
     </footer>
 
     <script>
@@ -172,10 +177,8 @@
         function handleCellClick(index) {
             if (board[index] !== "" || !isGameActive) return;
 
-            // تنفيذ حركة اللاعب الحالي (دائماً يبدأ بـ X)
             executeMove(index);
 
-            // إذا كان اللعب ضد الكمبيوتر وكان الدور على O
             if (isGameActive && isVsComputer && currentPlayer === "O") {
                 setTimeout(computerMove, 500);
             }
@@ -194,12 +197,12 @@
             }
 
             if (board.every(cell => cell !== "")) {
-                statusDisplay.innerText = "تعادل!";
+                statusDisplay.innerText = "النتيجة: تعادل!";
                 isGameActive = false;
                 return;
             }
 
-            // تبديل اللاعب
+            // تبديل اللاعب بشكل صحيح
             currentPlayer = (currentPlayer === "X") ? "O" : "X";
             updateStatusText();
         }
