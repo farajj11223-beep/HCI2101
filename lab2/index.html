@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة XO العصرية - نسخة الدكتور</title>
+    <title>لعبة XO العصرية</title>
     <style>
         :root {
             --primary-color: #6c5ce7;
@@ -119,11 +119,11 @@
             <h1>لعبة XO</h1>
             <div class="input-group">
                 <label>اسم اللاعب الأول (X):</label>
-                <input type="text" id="p1-name" placeholder="مثال: أحمد">
+                <input type="text" id="p1-name" value="">
             </div>
             <div class="input-group">
                 <label>اسم اللاعب الثاني (O):</label>
-                <input type="text" id="p2-name" placeholder="مثال: محمد">
+                <input type="text" id="p2-name" value="">
             </div>
             <button class="btn" onclick="startGame(false)">لعب (لاعبين)</button>
             <button class="btn btn-outline" onclick="startGame(true)">لعب ضد الكمبيوتر</button>
@@ -202,7 +202,6 @@
                 return;
             }
 
-            // تبديل اللاعب بشكل صحيح
             currentPlayer = (currentPlayer === "X") ? "O" : "X";
             updateStatusText();
         }
